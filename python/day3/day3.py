@@ -1,4 +1,5 @@
 from copy import deepcopy
+from time import perf_counter as pc
 
 def part1(diag_nums, diag_num_length):
     gamma_rate = []
@@ -11,7 +12,6 @@ def part1(diag_nums, diag_num_length):
     gamma_rate = int("".join(gamma_rate),2)
     epsilon_rate = gamma_rate^(2**diag_num_length-1)
     power_consumption = gamma_rate*epsilon_rate
-    print(f"power consumption: {power_consumption}")
     return power_consumption
 
 def part2(diag_nums,diag_num_length):
@@ -39,13 +39,20 @@ def part2(diag_nums,diag_num_length):
     ox_gen = int("".join(ox_gen_candidates[0]),2)
     co2_scrub = int("".join(co2_scrub_candidates[0]),2)
     life_support_rating = ox_gen * co2_scrub
-    print(f"ox_gen: {ox_gen}\nco2_scrub: {co2_scrub}\nlife support rating: {life_support_rating}")
     return life_support_rating
 
 if __name__ == "__main__":
+    p1_start = pc()
     diagnostic_nums = []
-    with open("day3_input.txt") as f:
+    with open("./python/day3/day3_input.txt") as f:
         for l in f.readlines():
             diagnostic_nums.append([c for c in l if c != '\n'])
     print(part1(diagnostic_nums,len(diagnostic_nums[0])))
+    p1_stop = pc()
+    p2_start = pc()
     print(part2(diagnostic_nums,len(diagnostic_nums[0])))
+    p2_stop = pc()
+
+    print("Times:")
+    print(f"Part 1: {p1_stop-p1_start}")
+    print(f"Part 2: {p2_stop-p2_start}")

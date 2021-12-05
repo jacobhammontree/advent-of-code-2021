@@ -1,4 +1,5 @@
 from copy import deepcopy
+from time import perf_counter as pc
 
 def check_board(b):
     won = False
@@ -50,6 +51,7 @@ def part2(boards,nums):
 
 
 if __name__ == "__main__":
+    p1_start = pc()
     nums = []
     boards = []
     lines = []
@@ -72,6 +74,11 @@ if __name__ == "__main__":
     boards.append(working_board)
     boards = [b for b in boards if b] # Get rid of empty boards
 
-    print(check_board(boards[0]))
     print(part1(deepcopy(boards),nums))
+    p1_stop = pc()
+    p2_start = pc()
     print(part2(deepcopy(boards),nums))
+    p2_stop = pc()
+    print("Times:")
+    print(f"Part 1: {p1_stop-p1_start}")
+    print(f"Part 2: {p2_stop-p2_start}")
