@@ -35,21 +35,23 @@ def progress_one_day_2(fish=defaultdict(lambda:0), n=8):
             fish[i] = fish[i+1]
     return fish
 
+def process_days(fish,days=256,n=8,progress=progress_one_day):
+    for i in range(days):
+        progress(fish,n)
+    return fish
+
+def count_fish(f):
+    count = 0
+    for v in f.values():
+        count+=v
+    return count
+
 if __name__ == "__main__":
     fish_d = defaultdict(lambda:0)
     with open("./python/day6/day6_input.txt", "r") as f:
         for l in f.readlines():
             for x in [int(x) for x in l.split(",")]:
                 fish_d[x]+=1
-    fish_d_cp = deepcopy(fish_d)
-    for i in range(256):
-        progress_one_day(fish_d)
-        progress_one_day_2(fish_d_cp)
-    count = 0
-    for _,v in fish_d.items():
-        count+=v
-    count2 = 0
-    for _,v in fish_d_cp.items():
-        count2+=v
+    process_days(fish_d,days=80,progress=progress_one_day_2)
+    count = count_fish(fish_d)
     print(count)
-    print(count2)
