@@ -2,29 +2,6 @@ from collections import defaultdict
 from copy import deepcopy
 
 def progress_one_day(fish=defaultdict(lambda:0), n=8):
-    new_zero = fish[1]
-    new_one = fish[2]
-    new_two = fish[3]
-    new_three = fish[4]
-    new_four = fish[5]
-    new_five = fish[6]
-    new_six = fish[7] + fish[0]
-    new_seven = fish[8]
-    new_eight = fish[0]
-
-    fish[0] = new_zero
-    fish[1] = new_one
-    fish[2] = new_two
-    fish[3] = new_three
-    fish[4] = new_four
-    fish[5] = new_five
-    fish[6] = new_six
-    fish[7] = new_seven
-    fish[8] = new_eight
-    return fish
-
-# Same as above, but a bit more extensible with looping
-def progress_one_day_2(fish=defaultdict(lambda:0), n=8):
     n_zero = fish[0]
     for i in range(0,n+1):
         if i == n:
@@ -52,6 +29,6 @@ if __name__ == "__main__":
         for l in f.readlines():
             for x in [int(x) for x in l.split(",")]:
                 fish_d[x]+=1
-    process_days(fish_d,days=80,progress=progress_one_day_2)
+    process_days(fish_d,days=256)
     count = count_fish(fish_d)
     print(count)
