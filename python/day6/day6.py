@@ -1,5 +1,4 @@
 from collections import defaultdict
-from copy import deepcopy
 
 def progress_one_day(fish=defaultdict(lambda:0), n=8):
     n_zero = fish[0]
