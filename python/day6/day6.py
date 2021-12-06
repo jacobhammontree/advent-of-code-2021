@@ -1,4 +1,5 @@
 from collections import defaultdict
+from time import perf_counter as pc
 
 def progress_one_day(fish=defaultdict(lambda:0), n=8):
     n_zero = fish[0]
@@ -23,11 +24,15 @@ def count_fish(f):
     return count
 
 if __name__ == "__main__":
+    start = pc()
     fish_d = defaultdict(lambda:0)
     with open("./python/day6/day6_input.txt", "r") as f:
         for l in f.readlines():
             for x in [int(x) for x in l.split(",")]:
                 fish_d[x]+=1
-    process_days(fish_d,days=256)
+    process_days(fish_d,days=10000)
     count = count_fish(fish_d)
     print(count)
+    stop = pc()
+    print("Times:")
+    print(f"256: {stop-start}")
